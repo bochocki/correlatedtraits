@@ -33,7 +33,7 @@ if loadPackages
 end
 
 # Include utility functions ----------------------------------------------------
-include("utilities.jl")
+include("simulation_utilities.jl")
 
 # ------------------------------------------------------------------------------
 # --- FUNCTION DEFINITIONS -----------------------------------------------------

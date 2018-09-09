@@ -1,6 +1,6 @@
 # Simple tests for the functions used in the simulation
 cd("D:\\GIT\\correlatedtraits\\inst")
-@everywhere include("simulation.jl")
+@everywhere include("simulation_main.jl")
 using Base.Test
 
 # set some parameters for testing

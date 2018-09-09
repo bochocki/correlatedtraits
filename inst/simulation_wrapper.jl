@@ -4,7 +4,7 @@ import DataFrames
 println("# of cores: ", Sys.CPU_CORES, "; # of workers: ", nworkers())
 
 # load simulation functions
-@everywhere include("simulation.jl")
+@everywhere include("simulation_main.jl")
 
 ## PARAMETER VALUES #####################################################
 tic()
