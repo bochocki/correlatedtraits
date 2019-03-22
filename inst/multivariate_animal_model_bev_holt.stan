@@ -109,11 +109,15 @@ generated quantities {
   corr_matrix[M]  corrE;
   vector     [ND] sim_D;
   vector     [NH] sim_H;
+  vector     [NH]  Kv;    // expected K values for observed individuals
+  real  <lower=0>  K;     // expected K
 
   G  = multiply_lower_tri_self_transpose(diag_pre_multiply(sigma_G, L_Omega_G));
   E  = multiply_lower_tri_self_transpose(diag_pre_multiply(sigma_R, L_Omega_R));
   P  = G + E;
   h2 = diagonal(G) ./ diagonal(P);
+  Kv = (exp(mu_r) - 1) ./ b;
+  K = (exp(beta[2]) - 1) / b;
 
   corrG = multiply_lower_tri_self_transpose(L_Omega_G);
   corrE = multiply_lower_tri_self_transpose(L_Omega_R);

@@ -1,4 +1,5 @@
-if(F) {
+if(T) {
+  Sys.setenv(USE_CXX14 = 1)
   library(correlatedtraits)
 
   rm(list=ls())
@@ -6,7 +7,7 @@ if(F) {
   set.seed(42)
 
   # set data directory
-  dir <- "D:/Dropbox/1 Projects/Academic/2016 genetic covariance invasions/data/"
+  dir <- "./correlatedtraits/data/"
 
   # set paths to data files
   female_fd_path <- paste0(dir, "fecundity_dispersal_raw.csv")
@@ -78,8 +79,7 @@ if(F) {
                    iD  = which(dat_i[, 1]>0),
                    iH  = which(dat_i[, 2]>0),
                    den = den,
-                   A   = as.matrix(A)
-  )
+                   A   = as.matrix(A))
 
   # set parallel options
   rstan::rstan_options(auto_write = TRUE)
@@ -95,34 +95,34 @@ if(F) {
                       control  = list(adapt_delta   = 0.99))
   save.image(file="bev_holt.rda")
 
-  model = rstan::extract(fits)
-  rstan::traceplot(fits, pars = "G")
-  rstan::traceplot(fits, pars = "E")
-  rstan::traceplot(fits, pars = "P")
-  rstan::summary(fits, pars = "G")$summary; colMeans(model$G)
-  rstan::summary(fits, pars = "E")$summary; colMeans(model$E)
-  rstan::summary(fits, pars = "P")$summary; colMeans(model$P)
-
-  rstan::traceplot(fits, pars = "corrG")
-  rstan::traceplot(fits, pars = "corrE")
-  rstan::summary(fits, pars = "corrG")$summary; colMeans(model$corrG)
-  rstan::summary(fits, pars = "corrE")$summary; colMeans(model$corrE)
-
-  rstan::traceplot(fits, pars = "h2")
-  rstan::summary(fits, pars = "h2")$summary; colMeans(model$h)
-
-  rstan::traceplot(fits, pars = "beta")
-  rstan::summary(fits, pars = "beta")$summary
-
-  rstan::traceplot(fits, pars = "b")
-  rstan::summary(fits, pars = "b")$summary
-
-  plot(D_obs, colMeans(model$sim_D), ylim=c(0, 25), xlim=c(0, 25))
-  lines(c(-100,100),c(-100,100),'l',col='red')
-
-  plot(H_obs, colMeans(model$sim_H), ylim=c(0, 40), xlim=c(0, 40))
-  lines(c(-100,100),c(-100,100),'l',col='red')
-
-  shinystan::launch_shinystan(fits)
+  # model = rstan::extract(fits)
+  # rstan::traceplot(fits, pars = "G")
+  # rstan::traceplot(fits, pars = "E")
+  # rstan::traceplot(fits, pars = "P")
+  # rstan::summary(fits, pars = "G")$summary; colMeans(model$G)
+  # rstan::summary(fits, pars = "E")$summary; colMeans(model$E)
+  # rstan::summary(fits, pars = "P")$summary; colMeans(model$P)
+  #
+  # rstan::traceplot(fits, pars = "corrG")
+  # rstan::traceplot(fits, pars = "corrE")
+  # rstan::summary(fits, pars = "corrG")$summary; colMeans(model$corrG)
+  # rstan::summary(fits, pars = "corrE")$summary; colMeans(model$corrE)
+  #
+  # rstan::traceplot(fits, pars = "h2")
+  # rstan::summary(fits, pars = "h2")$summary; colMeans(model$h)
+  #
+  # rstan::traceplot(fits, pars = "beta")
+  # rstan::summary(fits, pars = "beta")$summary
+  #
+  # rstan::traceplot(fits, pars = "b")
+  # rstan::summary(fits, pars = "b")$summary
+  #
+  # plot(D_obs, colMeans(model$sim_D), ylim=c(0, 25), xlim=c(0, 25))
+  # lines(c(-100,100),c(-100,100),'l',col='red')
+  #
+  # plot(H_obs, colMeans(model$sim_H), ylim=c(0, 40), xlim=c(0, 40))
+  # lines(c(-100,100),c(-100,100),'l',col='red')
+  #
+  # #shinystan::launch_shinystan(fits)
 }
 
